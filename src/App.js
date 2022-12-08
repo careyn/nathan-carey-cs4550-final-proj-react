@@ -1,5 +1,5 @@
-import Movies from "./movies";
-import moviesReducer from "./movies/movies-reducer";
+import Pokemon from "./pokemon";
+import pokemonReducer from "./pokemon/pokemon-reducer";
 import {configureStore} from "@reduxjs/toolkit";
 import {Provider} from "react-redux";
 import omdbReducer from "./omdb/omdb-reducer";
@@ -23,7 +23,7 @@ import PublicProfile from "./users/public-profile";
 
 const store = configureStore({
     reducer: {
-        movies: moviesReducer,
+        pokemon: pokemonReducer,
         omdb: omdbReducer,
         likes: likesReducer,
         users: usersReducer,
@@ -39,7 +39,7 @@ function App() {
                     <CurrentUser>
                         <Navigation/>
                         <Routes>
-                            <Route index element={<Movies/>}/>
+                            <Route index element={<Pokemon/>}/>
                             <Route path="/search" element={<OmdbSearch/>}/>
                             <Route path="/users" element={
                                 <ProtectedRoute>
