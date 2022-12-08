@@ -23,6 +23,13 @@ const Profile = () => {
             dispatch(findPokemonCaughtByUserThunk(currentUser))
         }
     }, [currentUser, likes])
+    useEffect(() => {
+        if (currentUser === "undefined" || currentUser === null || currentUser === undefined)
+            dispatch(findCommentsByAuthorThunk())
+        else {
+            dispatch(findCommentsByAuthorThunk(currentUser._id))
+        }
+    }, [currentUser, likes])
     return(
         <>
             <h1>Profile - {currentUser.username}</h1>
