@@ -4,7 +4,7 @@ import {configureStore} from "@reduxjs/toolkit";
 import {Provider} from "react-redux";
 import omdbReducer from "./omdb/omdb-reducer";
 import OmdbSearch from "./omdb/omdb-search";
-import likesReducer from "./likes/likes-reducer";
+import catchesReducer from "./catches/catches-reducer";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap-icons/font/bootstrap-icons.css';
 import {Routes, Route} from "react-router";
@@ -25,7 +25,7 @@ const store = configureStore({
     reducer: {
         pokemon: pokemonReducer,
         omdb: omdbReducer,
-        likes: likesReducer,
+        catches: catchesReducer,
         users: usersReducer,
         comments: commentsReducer,
     }

@@ -1,10 +1,10 @@
 import {createAsyncThunk} from "@reduxjs/toolkit";
-import {userLikesPokemon, findPokemonCaughtByUser, userUnlikesPokemon} from "./likes-service";
+import {userCatchesPokemon, findPokemonCaughtByUser, userReleasesPokemon} from "./catches-service";
 
-export const userLikesPokemonThunk = createAsyncThunk(
-    'userLikesPokemonThunk',
+export const userCatchesPokemonThunk = createAsyncThunk(
+    'userCatchesPokemonThunk',
     async (like) => {
-        return await userLikesPokemon(like.uid, like.pid)
+        return await userCatchesPokemon(like.uid, like.pid)
     }
 )
 
@@ -16,15 +16,15 @@ export const findPokemonCaughtByUserThunk = createAsyncThunk(
 )
 
 export const findPokemonCaughtByUserIDThunk = createAsyncThunk(
-    'findPokemonCaughtByUserThunk',
+    'findPokemonCaughtByUserIDThunk',
     async (uid) => {
         return await findPokemonCaughtByUser(uid)
     }
 )
 
-export const userUnlikesPokemonThunk = createAsyncThunk(
-    'userUnlikesPokemonThunk',
+export const userReleasesPokemonThunk = createAsyncThunk(
+    'userReleasesPokemonThunk',
     async (like) => {
-        return await userUnlikesPokemon(like.uid, like.pid)
+        return await userReleasesPokemon(like.uid, like.pid)
     }
 )

@@ -3,14 +3,14 @@ import {logoutThunk} from "./users-thunk";
 import {useNavigate} from "react-router";
 import {Link} from "react-router-dom";
 import { useEffect } from "react";
-import { findPokemonCaughtByUserThunk, userUnlikesPokemonThunk } from "../likes/likes-thunks";
+import { findPokemonCaughtByUserThunk, userReleasesPokemonThunk } from "../catches/catches-thunks";
 import { findCommentsByAuthorThunk } from "../comments/comments-thunks";
 
 const Profile = () => {
     const navigate = useNavigate()
     const {currentUser} = useSelector((state) => state.users)
     const {comments} = useSelector((state) => state.comments)
-    const {likes} = useSelector((state) => state.likes)
+    const {catches} = useSelector((state) => state.catches)
     const dispatch = useDispatch()
     const handleLogoutBtn = () => {
         dispatch(logoutThunk())
@@ -22,14 +22,14 @@ const Profile = () => {
         else {
             dispatch(findPokemonCaughtByUserThunk(currentUser))
         }
-    }, [currentUser, likes])
+    }, [currentUser, catches])
     useEffect(() => {
         if (currentUser === "undefined" || currentUser === null || currentUser === undefined)
             dispatch(findCommentsByAuthorThunk())
         else {
             dispatch(findCommentsByAuthorThunk(currentUser._id))
         }
-    }, [currentUser, likes])
+    }, [currentUser, comments])
     return(
         <>
             <h1>Profile - {currentUser.username}</h1>
@@ -38,7 +38,8 @@ const Profile = () => {
             <ul className="list-group">
                 {
                     comments && comments.map((comment) =>
-                    <li className="list-group-item">
+                    <li className="list-group-item"
+                        key={comment._id}>
                         <Link to={`/details/${comment.pokemon_name}`}>
                         {comment.comment} {comment.pokemon_name}
                         </Link>
@@ -49,17 +50,17 @@ const Profile = () => {
             <h1>Caught Pokemon</h1>
             <ul className="list-group">
                         {
-                            likes.map((like) =>
+                            catches.map((c) =>
                                 <li className="list-group-item"
-                                    key={like.pokemon._id}>
+                                    key={c._id}>
                                     <i onClick={() => {
-                                            dispatch(userUnlikesPokemonThunk({
-                                                uid: currentUser._id, pid: like.pokemon._id
+                                            dispatch(userReleasesPokemonThunk({
+                                                uid: currentUser._id, pid: c.pokemon._id
                                             }))
                                         }}
                                         className="bi bi-x float-end"></i>
-                                    <Link to={`/details/${like.pokemon.name}`}>
-                                        {like.pokemon.name}
+                                    <Link to={`/details/${c.pokemon.name}`}>
+                                        {c.pokemon.name}
                                     </Link>
                                 </li>
                             )

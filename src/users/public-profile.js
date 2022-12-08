@@ -4,13 +4,13 @@ import {useDispatch, useSelector} from "react-redux";
 import {findUserByIdThunk} from "./users-thunk";
 import {findCommentsByAuthorThunk} from "../comments/comments-thunks";
 import {Link} from "react-router-dom";
-import { findPokemonCaughtByUserIDThunk } from "../likes/likes-thunks";
+import { findPokemonCaughtByUserIDThunk } from "../catches/catches-thunks";
 
 const PublicProfile = () => {
     const {uid} = useParams()
     const {publicProfile} = useSelector((state) => state.users)
     const {comments} = useSelector((state) => state.comments)
-    const {likes} = useSelector((state) => state.likes)
+    const {catches} = useSelector((state) => state.catches)
     const dispatch = useDispatch()
     useEffect(() => {
         dispatch(findUserByIdThunk(uid))
@@ -36,10 +36,10 @@ const PublicProfile = () => {
             <h1>Caught Pokemon</h1>
             <ul class="list-group">
                 {
-                    likes && likes.map((like) =>
+                    catches && catches.map((c) =>
                     <li class="list-group-item">
-                        <Link to={`/details/${like.pokemon.name}`}>
-                            {like.pokemon.name}
+                        <Link to={`/details/${c.pokemon.name}`}>
+                            {c.pokemon.name}
                         </Link>
                     </li>
                     )
