@@ -18,7 +18,7 @@ import CurrentUser from "./users/current-user";
 import Profile from "./users/profile";
 import ProtectedRoute from "./users/protected-route";
 import OmdbDetails from "./omdb/omdb-details";
-import reviewsReducer from "./reviews/reviews-reducer";
+import commentsReducer from "./comments/comments-reducer";
 import PublicProfile from "./users/public-profile";
 
 const store = configureStore({
@@ -27,7 +27,7 @@ const store = configureStore({
         omdb: omdbReducer,
         likes: likesReducer,
         users: usersReducer,
-        reviews: reviewsReducer,
+        comments: commentsReducer,
     }
 })
 

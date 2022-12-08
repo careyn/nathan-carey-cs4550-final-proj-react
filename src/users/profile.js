@@ -11,7 +11,7 @@ const Profile = () => {
         dispatch(logoutThunk())
         navigate('/login')
     }
-    const {reviews} = useSelector((state) => state.reviews)
+    const {comments} = useSelector((state) => state.comments)
     return(
         <>
             <h1>Profile</h1>
@@ -23,10 +23,10 @@ const Profile = () => {
             <h1>Comments</h1>
             <ul>
                 {
-                    reviews && reviews.map((review) =>
+                    comments && comments.map((comment) =>
                     <li>
-                        <Link to={`/details/${review.imdbID}`}>
-                        {review.review} {review.imdbID}
+                        <Link to={`/details/${comment.pokemon_name}`}>
+                        {comment.comment} {comment.pokemon_name}
                         </Link>
                     </li>
                     )
@@ -35,10 +35,10 @@ const Profile = () => {
             <h1>Caught Pokemon</h1>
             <ul>
                 {
-                    reviews && reviews.map((review) =>
+                    comments && comments.map((comment) =>
                     <li>
-                        <Link to={`/details/${review.imdbID}`}>
-                        {review.review} {review.imdbID}
+                        <Link to={`/details/${comment.pokemon_name}`}>
+                        {comment.comment} {comment.pokemon_name}
                         </Link>
                     </li>
                     )

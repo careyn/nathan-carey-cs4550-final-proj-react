@@ -2,23 +2,23 @@ import {useParams} from "react-router";
 import {useDispatch, useSelector} from "react-redux";
 import {useEffect, useState} from "react";
 import {findPokemonByNameThunk} from "./omdb-thunks";
-import {createReviewThunk, findReviewsByMovieThunk} from "../reviews/reviews-thunks";
+import {createCommentThunk, findCommentsByPokemonThunk} from "../comments/comments-thunks";
 import {Link} from "react-router-dom";
 
 const OmdbDetails = () => {
     const {pokemon_name} = useParams()
-    const [review, setReview] = useState('')
-    const {reviews} = useSelector((state) => state.reviews)
+    const [comment, setComment] = useState('')
+    const {comments} = useSelector((state) => state.comments)
     const {details} = useSelector((state) => state.omdb)
     const {currentUser} = useSelector((state) => state.users)
     const dispatch = useDispatch()
     useEffect(() => {
         dispatch(findPokemonByNameThunk(pokemon_name))
-        dispatch(findReviewsByMovieThunk(pokemon_name))
+        dispatch(findCommentsByPokemonThunk(pokemon_name))
     },[])
     const handlePostCommentBtn = () => {
-        dispatch(createReviewThunk({
-            review,
+        dispatch(createCommentThunk({
+            comment,
             pokemon_name
         }))
     } 
@@ -51,16 +51,16 @@ const OmdbDetails = () => {
                 currentUser &&
                 <div>
                     <textarea
-                        onChange={(e) => setReview(e.target.value)}
+                        onChange={(e) => setComment(e.target.value)}
                         className="form-control"></textarea>
                     <button onClick={handlePostCommentBtn}>Post Comment</button>
                 </div>
             }
             <ul className="list-group">
                 {
-                    reviews.map((comment) =>
+                    comments.map((comment) =>
                         <li className="list-group-item">
-                            {comment.review}
+                            {comment.comment}
                             <Link to={`/profile/${comment.author._id}`} className="float-end">
                                 {comment.author.username}
                             </Link>

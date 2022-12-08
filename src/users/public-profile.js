@@ -2,17 +2,17 @@ import {useParams} from "react-router";
 import {useEffect} from "react";
 import {useDispatch, useSelector} from "react-redux";
 import {findUserByIdThunk} from "./users-thunk";
-import {findReviewsByAuthorThunk} from "../reviews/reviews-thunks";
+import {findCommentsByAuthorThunk} from "../comments/comments-thunks";
 import {Link} from "react-router-dom";
 
 const PublicProfile = () => {
     const {uid} = useParams()
     const {publicProfile} = useSelector((state) => state.users)
-    const {reviews} = useSelector((state) => state.reviews)
+    const {comments} = useSelector((state) => state.comments)
     const dispatch = useDispatch()
     useEffect(() => {
         dispatch(findUserByIdThunk(uid))
-        dispatch(findReviewsByAuthorThunk(uid))
+        dispatch(findCommentsByAuthorThunk(uid))
     }, [uid])
     return(
         <>
@@ -21,10 +21,10 @@ const PublicProfile = () => {
             <h1>Comments</h1>
             <ul>
                 {
-                    reviews && reviews.map((review) =>
+                    comments && comments.map((comment) =>
                     <li>
-                        <Link to={`/details/${review.imdbID}`}>
-                        {review.review} {review.imdbID}
+                        <Link to={`/details/${comment.pokemon_name}`}>
+                        {comment.comment} {comment.pokemon_name}
                         </Link>
                     </li>
                     )
@@ -33,10 +33,10 @@ const PublicProfile = () => {
             <h1>Caught Pokemon</h1>
             <ul>
                 {
-                    reviews && reviews.map((review) =>
+                    comments && comments.map((comment) =>
                     <li>
-                        <Link to={`/details/${review.imdbID}`}>
-                        {review.review} {review.imdbID}
+                        <Link to={`/details/${comment.pokemon_name}`}>
+                        {comment.comment} {comment.pokemon_name}
                         </Link>
                     </li>
                     )
