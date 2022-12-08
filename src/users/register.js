@@ -8,9 +8,10 @@ const Register = () => {
     const {currentUser} = useSelector((state) => state.users)
     const [username, setUsername] = useState('')
     const [password, setPassword] = useState('')
+    const [role, setRole] = useState(false)
     const dispatch = useDispatch()
     const handleRegisterBtn = () => {
-        dispatch(registerThunk({username, password}))
+        dispatch(registerThunk({username, password, role}))
     }
 
     if(currentUser) {
@@ -31,8 +32,17 @@ const Register = () => {
                 placeholder="password"
                 type="password"
                 value={password}/>
+            <div class="d-flex justify-content-center mt-2">
+            <label for="moderator" class="form-check-label">Moderator &#160;</label>
+            <input
+                onClick={() => setRole(!role)}
+                type="checkbox"
+                class="form-check-input"
+                value={role}
+                id="moderator"/>
+            </div>
             <button
-                className="btn btn-primary w-100"
+                className="btn btn-primary w-100 mt-2"
                 onClick={handleRegisterBtn}>
                 Register
             </button>

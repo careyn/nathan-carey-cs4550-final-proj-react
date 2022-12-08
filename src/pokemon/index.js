@@ -3,6 +3,7 @@ import {useEffect, useState} from "react";
 import {createPokemonThunk, deletePokemonThunk, findAllPokemonThunk} from "./pokemon-thunks";
 import {userCatchesPokemonThunk, findPokemonCaughtByUserThunk, userReleasesPokemonThunk} from "../catches/catches-thunks";
 import { Link } from "react-router-dom";
+import { current } from "@reduxjs/toolkit";
 
 const Pokemon = () => {
     const {currentUser} = useSelector((state) => state.users)
@@ -50,28 +51,34 @@ const Pokemon = () => {
         
             <h1>All Pokemon</h1>
             <ul className="list-group">
-                <li className="list-group-item" key="create">
-                    <button className="btn btn-success float-end" onClick={() => {
-                        dispatch(createPokemonThunk(
-                            {
-                                name: pokemon.name
-                            }
-                        ))
-                    }}>Create</button>
-                    <input
-                        className="form-control w-75"
-                        onChange={(e) =>
-                            setPokemon({...pokemon, name: e.target.value})}
-                        value={pokemon.name}/>
-                </li>
+                {
+                    currentUser && (currentUser.role === "MODERATOR") &&
+                    <li className="list-group-item" key="create">
+                        <button className="btn btn-success float-end" onClick={() => {
+                            dispatch(createPokemonThunk(
+                                {
+                                    name: pokemon.name
+                                }
+                            ))
+                        }}>Create</button>
+                        <input
+                            className="form-control w-75"
+                            onChange={(e) =>
+                                setPokemon({...pokemon, name: e.target.value.toLowerCase()})}
+                            value={pokemon.name}/>
+                    </li>
+                }
                 {
                     pokemons.map((pokemon) =>
                         <li className="list-group-item"
                             key={pokemon._id}>
-                            <i onClick={() => {
-                                dispatch(deletePokemonThunk(pokemon._id))
-                            }}
-                                className="float-end bi bi-trash"></i>
+                            {
+                                currentUser && (currentUser.role === "MODERATOR") &&
+                                <i onClick={() => {
+                                    dispatch(deletePokemonThunk(pokemon._id))
+                                }}
+                                    className="float-end bi bi-trash"></i>
+                            }
                             {   currentUser &&
                                 <i onClick={() => {
                                             dispatch(userCatchesPokemonThunk({

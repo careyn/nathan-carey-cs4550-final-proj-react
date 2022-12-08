@@ -12,6 +12,7 @@ export const findUserById = async (uid) => {
 }
 
 export const register = async (user) => {
+    user.role = user.role ? "MODERATOR" : "TRAINER"
     const response = await api.post(`${BASE_API_URL}/register`, user)
     const newUser = response.data
     return newUser
