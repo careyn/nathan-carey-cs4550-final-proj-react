@@ -32,7 +32,7 @@ const OmdbSearch = () => {
                     pokemon && pokemon.map((monster) =>
                         <li key={monster.id} className="list-group-item">
 
-                            <img src={monster.sprites.front_default} height={50}/>
+                            <img src={monster.sprites?.front_default} height={50}/>
                             <Link to={`/details/${monster.name}`}>
                                 {monster.name}
                             </Link>
