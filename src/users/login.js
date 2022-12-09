@@ -1,18 +1,16 @@
 import {useState} from "react";
 import {useDispatch, useSelector} from "react-redux";
 import {loginThunk} from "./users-thunk";
-import {Navigate, useNavigate} from "react-router";
+import {Navigate} from "react-router";
 
 const Login = () => {
     const {currentUser} = useSelector((state) => state.users)
     const [username, setUsername] = useState('')
     const [password, setPassword] = useState('')
     const dispatch = useDispatch()
-    const navigate = useNavigate()
     const handleLoginBtn = () => {
         try {
             dispatch(loginThunk({username, password}))
-            // navigate('/profile')
         } catch (e) {
 
         }
@@ -32,7 +30,7 @@ const Login = () => {
                 onChange={(e) => setPassword(e.target.value)}
                 className="form-control" placeholder="password" type="password" value={password}/>
             <button
-                className="btn btn-primary w-100"
+                className="btn btn-primary w-100 mt-2"
                 onClick={handleLoginBtn}>Login</button>
         </>
     )

@@ -27,7 +27,7 @@ const PublicProfile = () => {
                 <li class="list-group-item"><b>Region:</b> {publicProfile?.region}</li>
                 <li class="list-group-item"><b>Favorite Pokemon:</b> {publicProfile?.favorite}</li>
             </ul>
-            <h2>Comments</h2>
+            <h2 class="mt-1">Comments</h2>
             <ul class="list-group">
                 {
                     comments && comments.map((comment) =>
@@ -46,7 +46,7 @@ const PublicProfile = () => {
                     )
                 }
             </ul>
-            <h2>Caught Pokemon</h2>
+            <h2 class="mt-1">Caught Pokemon</h2>
             <ul class="list-group">
                 {
                     catches && catches.map((c) =>

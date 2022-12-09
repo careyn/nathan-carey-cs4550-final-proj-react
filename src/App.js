@@ -6,6 +6,7 @@ import omdbReducer from "./omdb/omdb-reducer";
 import OmdbSearch from "./omdb/omdb-search";
 import catchesReducer from "./catches/catches-reducer";
 import 'bootstrap/dist/css/bootstrap.min.css';
+import 'bootswatch/dist/quartz/bootstrap.min.css';
 import 'bootstrap-icons/font/bootstrap-icons.css';
 import {Routes, Route} from "react-router";
 import {BrowserRouter} from "react-router-dom";
@@ -20,6 +21,7 @@ import ProtectedRoute from "./users/protected-route";
 import OmdbDetails from "./omdb/omdb-details";
 import commentsReducer from "./comments/comments-reducer";
 import PublicProfile from "./users/public-profile";
+import './App.css';
 
 const store = configureStore({
     reducer: {

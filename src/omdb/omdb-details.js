@@ -24,7 +24,7 @@ const OmdbDetails = () => {
     } 
     return( 
         <>
-            <h1>{details.name}</h1>
+            <h1>{details.name?.toUpperCase()}</h1>
             <div className="row">
                 <div className="col">
                     <ul className="list-group">
@@ -46,16 +46,17 @@ const OmdbDetails = () => {
                     }
                 </div>
             </div>
+            <h2 class="mt-2">Comments</h2>
             {
                 currentUser &&
                 <div>
                     <textarea
                         onChange={(e) => setComment(e.target.value)}
                         className="form-control"></textarea>
-                    <button onClick={handlePostCommentBtn}>Post Comment</button>
+                    <button class="mb-1 btn btn-secondary display-flex w-10 float-end" onClick={handlePostCommentBtn}>Post Comment</button>
                 </div>
             }
-            <ul className="list-group">
+            <ul className="list-group w-100">
                 {
                     comments.map((comment) =>
                         <li className="list-group-item" key={comment._id}>

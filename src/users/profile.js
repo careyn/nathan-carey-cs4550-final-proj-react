@@ -78,7 +78,7 @@ const Profile = () => {
                 onClick={handleUpdate}>
                 Update Information
             </button>
-            <h2>Comments</h2>
+            <h2 class="mt-1">Comments</h2>
             <ul className="list-group">
                 {
                     comments && comments.map((comment) =>
@@ -98,7 +98,7 @@ const Profile = () => {
                     )
                 }
             </ul>
-            <h2>Caught Pokemon</h2>
+            <h2 class="mt-1">Caught Pokemon</h2>
             <ul className="list-group">
                         {
                             catches.map((c) =>

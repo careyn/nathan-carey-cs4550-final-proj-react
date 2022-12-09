@@ -3,7 +3,6 @@ import {useEffect, useState} from "react";
 import {createPokemonThunk, deletePokemonThunk, findAllPokemonThunk} from "./pokemon-thunks";
 import {userCatchesPokemonThunk, findPokemonCaughtByUserThunk, userReleasesPokemonThunk} from "../catches/catches-thunks";
 import { Link } from "react-router-dom";
-import { current } from "@reduxjs/toolkit";
 
 const Pokemon = () => {
     const {currentUser} = useSelector((state) => state.users)
@@ -26,7 +25,7 @@ const Pokemon = () => {
             {
                 currentUser &&
                 <>
-                    <h2>Welcome {currentUser.username} </h2>
+                    <h2 class="mt-1">Welcome Back {currentUser.username}! </h2>
                     <h1>Your Pokemon</h1>
                     <ul className="list-group">
                         {
@@ -49,18 +48,18 @@ const Pokemon = () => {
                 </>
             }
         
-            <h1>All Pokemon</h1>
+            <h1 class="mt-1">All Pokemon</h1>
             <ul className="list-group">
                 {
                     currentUser && (currentUser.role === "MODERATOR") &&
-                    <li className="list-group-item" key="create">
+                    <li className="list-group-item" key="add">
                         <button className="btn btn-success float-end" onClick={() => {
                             dispatch(createPokemonThunk(
                                 {
                                     name: pokemon.name
                                 }
                             ))
-                        }}>Create</button>
+                        }}>Add Pokemon</button>
                         <input
                             className="form-control w-75"
                             onChange={(e) =>

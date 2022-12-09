@@ -18,7 +18,7 @@ const Users = () => {
                     users.map((user) =>
                     <li key={user._id} className="list-group-item">
                         <Link to={`/profile/${user._id}`} className="list-group-item">
-                            {user.username}
+                            {user.username} - {user.role}
                         </Link>
                     </li>
                     )
