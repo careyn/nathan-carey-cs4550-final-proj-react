@@ -20,7 +20,7 @@ const PublicProfile = () => {
     }, [uid])
     return(
         <>
-            <h1>{publicProfile && publicProfile.username}</h1>
+            <h1>{publicProfile && publicProfile.role} Profile - {publicProfile && publicProfile.username}</h1>
             <h2>Public Information</h2>
             <ul class="list-group">
                 <li class="list-group-item"><b>Bio:</b> {publicProfile?.bio}</li>
