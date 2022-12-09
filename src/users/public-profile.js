@@ -23,9 +23,9 @@ const PublicProfile = () => {
             <h1>{publicProfile && publicProfile.username}</h1>
             <h2>Public Information</h2>
             <ul class="list-group">
-                <li class="list-group-item"><b>Bio:</b> {publicProfile.bio}</li>
-                <li class="list-group-item"><b>Region:</b> {publicProfile.region}</li>
-                <li class="list-group-item"><b>Favorite Pokemon:</b> {publicProfile.favorite}</li>
+                <li class="list-group-item"><b>Bio:</b> {publicProfile?.bio}</li>
+                <li class="list-group-item"><b>Region:</b> {publicProfile?.region}</li>
+                <li class="list-group-item"><b>Favorite Pokemon:</b> {publicProfile?.favorite}</li>
             </ul>
             <h2>Comments</h2>
             <ul class="list-group">
