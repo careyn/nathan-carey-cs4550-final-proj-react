@@ -20,3 +20,9 @@ export const findCommentsByAuthor = async (author) => {
     const response = await api.get(`${AUTHOR_COMMENTS_API}/${author}/comments`)
     return response.data
 }
+
+export const deleteComment = async (cid) => {
+    const response = await api.delete(`${COMMENTS_API}/${cid}`)
+    const status = response.data
+    return cid
+}

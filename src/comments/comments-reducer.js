@@ -1,5 +1,5 @@
 import {createSlice} from "@reduxjs/toolkit";
-import {createCommentThunk, findCommentsByAuthorThunk, findCommentsByPokemonThunk} from "./comments-thunks";
+import {createCommentThunk, findCommentsByAuthorThunk, findCommentsByPokemonThunk, deleteCommentThunk} from "./comments-thunks";
 
 const commentsReducer = createSlice({
     name: 'comments',
@@ -15,6 +15,11 @@ const commentsReducer = createSlice({
         },
         [findCommentsByAuthorThunk.fulfilled]: (state, action) => {
             state.comments = action.payload
+        },
+        [deleteCommentThunk.fulfilled]: (state, action) => {
+            state.comments = state.comments.filter(c => {
+                return c._id !== action.payload
+            })
         }
     }
 })

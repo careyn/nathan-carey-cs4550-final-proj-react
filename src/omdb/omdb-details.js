@@ -2,7 +2,7 @@ import {useParams} from "react-router";
 import {useDispatch, useSelector} from "react-redux";
 import {useEffect, useState} from "react";
 import {findPokemonByNameThunk} from "./omdb-thunks";
-import {createCommentThunk, findCommentsByPokemonThunk} from "../comments/comments-thunks";
+import {createCommentThunk, findCommentsByPokemonThunk, deleteCommentThunk} from "../comments/comments-thunks";
 import {Link} from "react-router-dom";
 
 const OmdbDetails = () => {
@@ -15,27 +15,26 @@ const OmdbDetails = () => {
     useEffect(() => {
         dispatch(findPokemonByNameThunk(pokemon_name))
         dispatch(findCommentsByPokemonThunk(pokemon_name))
-    },[])
+    },[comments])
     const handlePostCommentBtn = () => {
         dispatch(createCommentThunk({
             comment,
             pokemon_name
         }))
     } 
-    console.log(details)
     return( 
         <>
             <h1>{details.name}</h1>
             <div className="row">
                 <div className="col">
                     <ul className="list-group">
-                        <li className="list-group-item">Pokedex Number: {details.id}</li>
-                        <li className="list-group-item">Height: {details.height / 10} meters</li>
-                        <li className="list-group-item">Weight: {details.weight / 10} kilograms</li>
-                        <li className="list-group-item">Types:
+                        <li className="list-group-item" key="Pokedex">Pokedex Number: {details.id}</li>
+                        <li className="list-group-item" key="Height">Height: {details.height / 10} meters</li>
+                        <li className="list-group-item" key="Weight">Weight: {details.weight / 10} kilograms</li>
+                        <li className="list-group-item" key="Types">Types:
                             <ul>
                                 {
-                                    details.types?.map( type => <li>{type.type.name}</li>)
+                                    details.types?.map( type => <li key="type.type.name">{type.type.name}</li>)
                                 }
                             </ul>
                         </li>
@@ -59,7 +58,14 @@ const OmdbDetails = () => {
             <ul className="list-group">
                 {
                     comments.map((comment) =>
-                        <li className="list-group-item">
+                        <li className="list-group-item" key={comment._id}>
+                        {
+                            currentUser && (currentUser.role === "MODERATOR" || currentUser._id === comment.author._id) &&
+                            <i onClick={() => {
+                                dispatch(deleteCommentThunk(comment._id))
+                            }}
+                                className="px-2 float-end bi bi-trash"></i>
+                        }
                             {comment.comment}
                             <Link to={`/profile/${comment.author._id}`} className="float-end">
                                 {comment.author.username}
