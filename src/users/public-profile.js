@@ -2,7 +2,7 @@ import {useParams} from "react-router";
 import {useEffect} from "react";
 import {useDispatch, useSelector} from "react-redux";
 import {findUserByIdThunk} from "./users-thunk";
-import {findCommentsByAuthorThunk} from "../comments/comments-thunks";
+import {findCommentsByAuthorThunk, deleteCommentThunk} from "../comments/comments-thunks";
 import {Link} from "react-router-dom";
 import { findPokemonCaughtByUserIDThunk } from "../catches/catches-thunks";
 
@@ -11,6 +11,7 @@ const PublicProfile = () => {
     const {publicProfile} = useSelector((state) => state.users)
     const {comments} = useSelector((state) => state.comments)
     const {catches} = useSelector((state) => state.catches)
+    const {currentUser} = useSelector((state) => state.users)
     const dispatch = useDispatch()
     useEffect(() => {
         dispatch(findUserByIdThunk(uid))
@@ -20,20 +21,32 @@ const PublicProfile = () => {
     return(
         <>
             <h1>{publicProfile && publicProfile.username}</h1>
-            <p>Public information</p>
-            <h1>Comments</h1>
+            <h2>Public Information</h2>
+            <ul class="list-group">
+                <li class="list-group-item"><b>Bio:</b> {publicProfile.bio}</li>
+                <li class="list-group-item"><b>Region:</b> {publicProfile.region}</li>
+                <li class="list-group-item"><b>Favorite Pokemon:</b> {publicProfile.favorite}</li>
+            </ul>
+            <h2>Comments</h2>
             <ul class="list-group">
                 {
                     comments && comments.map((comment) =>
-                    <li class="list-group-item">
+                    <li class="list-group-item" key={comment._id}>
+                        {
+                            currentUser && (currentUser.role === "MODERATOR" || currentUser._id === uid) &&
+                            <i onClick={() => {
+                                dispatch(deleteCommentThunk(comment._id))
+                            }}
+                                className="float-end bi bi-trash"></i>
+                        }
                         <Link to={`/details/${comment.pokemon_name}`}>
-                        {comment.comment} {comment.pokemon_name}
+                        {comment.comment} - {comment.pokemon_name}
                         </Link>
                     </li>
                     )
                 }
             </ul>
-            <h1>Caught Pokemon</h1>
+            <h2>Caught Pokemon</h2>
             <ul class="list-group">
                 {
                     catches && catches.map((c) =>
