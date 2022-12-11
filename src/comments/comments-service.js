@@ -1,3 +1,4 @@
+/* eslint-disable */
 import axios from "axios";
 
 const COMMENTS_API = 'http://localhost:4000/api/comments'

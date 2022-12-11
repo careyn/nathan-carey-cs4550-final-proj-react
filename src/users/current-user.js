@@ -1,3 +1,4 @@
+/* eslint-disable */
 import {useDispatch, useSelector} from "react-redux";
 import React, {useEffect} from "react";
 import {profileThunk} from "./users-thunk";

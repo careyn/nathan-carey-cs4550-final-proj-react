@@ -1,3 +1,4 @@
+/* eslint-disable */
 import {useDispatch, useSelector} from "react-redux";
 import {useEffect, useState} from "react";
 import {createPokemonThunk, deletePokemonThunk, findAllPokemonThunk} from "./pokemon-thunks";
@@ -47,8 +48,17 @@ const Pokemon = () => {
                     </ul>
                 </>
             }
+
+            {
+                !currentUser &&
+                <>
+                    <h1 class="mt-1">Welcome!</h1>
+                    <p>Pokemon Hunt is a website that allows Moderators to add pokemon to a list of pokemon for Trainers to search for.  After a Trainer catches a pokemon, they can add them to their list of caught pokemon.  You can also view the pokedex details of pokemon using the "search" functionality, and comment on your favorite pokemon's pages.</p> 
+                    <p>Feel free to look around as a guest or register to get started!</p>
+                </>
+            }
         
-            <h1 class="mt-1">All Pokemon</h1>
+            <h1 class="mt-1">Pokemon Hunt</h1>
             <ul className="list-group">
                 {
                     currentUser && (currentUser.role === "MODERATOR") &&

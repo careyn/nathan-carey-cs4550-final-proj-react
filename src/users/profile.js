@@ -1,3 +1,4 @@
+/* eslint-disable */
 import {useDispatch, useSelector} from "react-redux";
 import {logoutThunk, updateUserThunk} from "./users-thunk";
 import {useNavigate} from "react-router";

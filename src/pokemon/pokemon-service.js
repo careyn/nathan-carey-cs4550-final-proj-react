@@ -1,3 +1,4 @@
+/* eslint-disable */
 import axios from "axios";
 const POKEMON_API_URL = 'http://localhost:4000/pokemon'
 
