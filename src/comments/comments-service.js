@@ -1,9 +1,9 @@
 /* eslint-disable */
 import axios from "axios";
 
-const COMMENTS_API = 'http://localhost:4000/api/comments'
-const POKEMON_COMMENTS_API = 'http://localhost:4000/api/pokemon'
-const AUTHOR_COMMENTS_API = 'http://localhost:4000/api/users'
+const COMMENTS_API = 'https://pokemon-hunt.herokuapp.com/api/comments'
+const POKEMON_COMMENTS_API = 'https://pokemon-hunt.herokuapp.com/api/pokemon'
+const AUTHOR_COMMENTS_API = 'https://pokemon-hunt.herokuapp.com/api/users'
 
 const api = axios.create({withCredentials: true});
 

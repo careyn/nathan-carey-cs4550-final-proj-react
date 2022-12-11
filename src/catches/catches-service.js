@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const USERS_URL = 'http://localhost:4000/users'
+const USERS_URL = 'https://pokemon-hunt.herokuapp.com/users'
 
 export const userCatchesPokemon = async (uid, pid) => {
     const response = await axios.post(`${USERS_URL}/${uid}/catches/${pid}`)

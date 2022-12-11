@@ -1,6 +1,6 @@
 /* eslint-disable */
 import axios from "axios";
-const POKEMON_API_URL = 'http://localhost:4000/pokemon'
+const POKEMON_API_URL = 'https://pokemon-hunt.herokuapp.com/pokemon'
 
 export const createPokemon = async (newPokemon) => {
     const response = await axios.post(POKEMON_API_URL, newPokemon)
