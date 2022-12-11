@@ -1,7 +1,7 @@
 import axios from "axios";
 
-const USER_API_URL = 'https://pokemon-hunt.herokuapp.com/users'
-const BASE_API_URL = 'https://pokemon-hunt.herokuapp.com'
+const USER_API_URL = 'http://localhost:4000/users'
+const BASE_API_URL = 'http://localhost:4000'
 
 const api = axios.create({withCredentials: true});
 
